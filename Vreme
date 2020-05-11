@@ -1,0 +1,19 @@
+import requests
+API_KEY = "30c7a838854baf6e7ec3ff5b8ba63bbf"
+templateURL = "http://api.openweathermap.org/data/2.5/weather?q={}&appid=" + API_KEY
+
+city = input('Scrie numele orasului:\n')
+finalURL = templateURL.format(city)
+response = requests.get(finalURL).json()
+temp_k = response["main"]["temp"]
+temp_c = round(temp_k - 273.15)
+print("Sunt {} grade celsius".format(temp_c))
+
+if temp_c < 0:
+    print("Este foarte frig")
+elif temp_c > 0 and temp_c < 15:
+    print("Este vremea pentru o geaca")
+elif temp_c > 15 and temp_c < 30:
+    print("Este vreme de bluza sau tricou")
+else:
+    print("Este foarte cald")
